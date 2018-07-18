@@ -1,0 +1,23 @@
+import requests
+from bs4 import BeautifulSoup
+import urllib
+
+def run():
+    for i in range(1,6):
+        response = requests.get('http://xkcd.com/{}'.format(i))
+        soup = BeautifulSoup(response.content, 'html.parser')
+        image_container = soup.find(id='comic')
+
+        image_url = image_container.find('img')['src']
+        image_name = image_url.split('/')[-1]
+        print('Descargando la imagen {}'.format(image_name ))
+        urllib.urlretrieve('https:{}'.format(image_url),image_name)
+
+
+
+
+if __name__ == '__main__':
+    run()
+
+    https://www.googleapis.com/youtube/v3/videos?id=7lCDEYXw3mM&key=AIzaSyBaF2D_RX-bordcOaY_GA8Xadphwr2vL_A
+    https://www.googleapis.com/youtube/v3/videos?part=recordingDetails&id=lvg6P0Ojuko&key=AIzaSyBaF2D_RX-bordcOaY_GA8Xadphwr2vL_A
